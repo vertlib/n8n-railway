@@ -1,0 +1,30 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "n8n start"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+```
+
+Запуш оба файла в main-ветку.
+
+---
+
+### Шаг 2. Подключи репозиторий к Railway
+
+1. Открой **Railway Dashboard** → твой проект с n8n
+2. Кликни на n8n-сервис
+3. Перейди в **Settings** → раздел **Source**
+4. Отключи текущий источник (если это был шаблон Railway)
+5. Нажми **Connect Repo** → выбери свой новый GitHub-репозиторий `n8n-railway`
+6. Railway автоматически определит Dockerfile и начнёт билд
+
+---
+
+### Шаг 3. Добавь переменную окружения
+
+В Railway Dashboard → твой n8n-сервис → **Variables** → добавь:
+```
+NODE_FUNCTION_ALLOW_EXTERNAL=pdf-lib,@pdf-lib/fontkit
